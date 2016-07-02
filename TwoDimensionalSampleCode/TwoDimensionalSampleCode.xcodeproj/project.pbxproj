@@ -13,6 +13,7 @@
 		E8E3CBC11D284D7F00C721DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8E3CBC01D284D7F00C721DF /* Assets.xcassets */; };
 		E8E3CBC41D284D7F00C721DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8E3CBC21D284D7F00C721DF /* LaunchScreen.storyboard */; };
 		E8E3CBCF1D284D7F00C721DF /* TwoDimensionalSampleCodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3CBCE1D284D7F00C721DF /* TwoDimensionalSampleCodeTests.swift */; };
+		E8E3CBDA1D284DE400C721DF /* TwoDimensional.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E3CBD91D284DE400C721DF /* TwoDimensional.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		E8E3CBCA1D284D7F00C721DF /* TwoDimensionalSampleCodeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwoDimensionalSampleCodeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8E3CBCE1D284D7F00C721DF /* TwoDimensionalSampleCodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoDimensionalSampleCodeTests.swift; sourceTree = "<group>"; };
 		E8E3CBD01D284D7F00C721DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8E3CBD91D284DE400C721DF /* TwoDimensional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoDimensional.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				E8E3CBC01D284D7F00C721DF /* Assets.xcassets */,
 				E8E3CBC21D284D7F00C721DF /* LaunchScreen.storyboard */,
 				E8E3CBC51D284D7F00C721DF /* Info.plist */,
+				E8E3CBD91D284DE400C721DF /* TwoDimensional.swift */,
 			);
 			path = TwoDimensionalSampleCode;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			files = (
 				E8E3CBBC1D284D7F00C721DF /* ViewController.swift in Sources */,
 				E8E3CBBA1D284D7F00C721DF /* AppDelegate.swift in Sources */,
+				E8E3CBDA1D284DE400C721DF /* TwoDimensional.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

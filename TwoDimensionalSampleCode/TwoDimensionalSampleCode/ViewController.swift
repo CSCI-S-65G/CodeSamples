@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let twoDim = TwoDimensional(columns: 5, rows: 10)
+        print(twoDim.prettyPrint(twoDim.twoDimensionalArray))
     }
 
     override func didReceiveMemoryWarning() {
