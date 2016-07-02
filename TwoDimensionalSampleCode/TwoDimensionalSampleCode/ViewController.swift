@@ -14,7 +14,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let twoDim = TwoDimensional(columns: 5, rows: 10)
+        var twoDim = TwoDimensional(columns: 5, rows: 10)
+        print(twoDim.prettyPrint(twoDim.twoDimensionalArray))
+        
+        twoDim = TwoDimensional(columns: -5, rows: -10)
         print(twoDim.prettyPrint(twoDim.twoDimensionalArray))
     }
 

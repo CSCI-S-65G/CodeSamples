@@ -21,16 +21,29 @@ class TwoDimensionalSampleCodeTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    // MARK: - The TwoDimensional Tests
+    func testNegativeColumnRowMaxes() {
+        let twoDim0Col0Row = TwoDimensional(columns: -10, rows: -10)
+        XCTAssertTrue(twoDim0Col0Row.columnsMax == 0,
+                      "We expect that the negative column will be " +
+                        "normalized <\(twoDim0Col0Row.columnsMax)>")
+        XCTAssertTrue(twoDim0Col0Row.rowsMax == 0,
+                      "We expect that the negative row will be " +
+                        "normalized <\(twoDim0Col0Row.rowsMax)>")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+
+    func testPositiveColumnRowMaxes() {
+        let expectedColumnValue = 7
+        let expectedRowValue = 3
+
+        let twoDim0Col0Row = TwoDimensional(columns: expectedColumnValue,
+                                            rows: expectedRowValue)
+        XCTAssertTrue(twoDim0Col0Row.columnsMax == expectedColumnValue,
+                      "We expect that the negative column will be " +
+                        "normalized <\(twoDim0Col0Row.columnsMax)>")
+        XCTAssertTrue(twoDim0Col0Row.rowsMax == expectedRowValue,
+                      "We expect that the negative row will be " +
+                        "normalized <\(twoDim0Col0Row.rowsMax)>")
     }
     
 }
