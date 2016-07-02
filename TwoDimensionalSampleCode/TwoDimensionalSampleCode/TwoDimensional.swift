@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// LifeGrid
+/// A useful feature of Swift that lets you convert a known class to an alias to minimize typing. This is especially useful in closure definitions.
 typealias LifeGrid = [[Int]]
 
 /**
@@ -22,6 +22,8 @@ class TwoDimensional {
     
     /**
      Initialize the two-dimensional array defined in this class.
+     
+     If the values are negative, they'll be normalized to zero values.
      
      - Parameter columnsMax: non-zero maximum
      - Parameter rowsMax: non-zero maximum
