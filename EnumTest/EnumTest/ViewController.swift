@@ -12,9 +12,12 @@ class ViewController: UIViewController {
     
     // MARK: - UIElements
     @IBOutlet var colorSquare : UIView!
+    @IBOutlet var whiteSquare : UIView!
     
     // Switching color
     var currentColor = Color.red
+    
+    var isWhiteShowing = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,31 @@ class ViewController: UIViewController {
         
         // Change the color
         colorSquare.backgroundColor = currentColor.color
+    }
+    
+    @IBAction func flipColorSquare(button: UIButton) {
+        // Add the flip animation
+        let fromView : UIView
+        let toView : UIView
+        
+        // Prepare to flip the value
+        if isWhiteShowing {
+            fromView = whiteSquare
+            toView = colorSquare
+        } else {
+            fromView = colorSquare
+            toView = whiteSquare
+        }
+        
+        // Keep track of which is in front
+        isWhiteShowing = !isWhiteShowing
+        
+        UIView.transitionFromView(fromView,
+                                  toView: toView,
+                                  duration: 0.5,
+                                  options: [UIViewAnimationOptions.TransitionFlipFromLeft,
+                                    .ShowHideTransitionViews],
+                                  completion: nil)
     }
 
 }
