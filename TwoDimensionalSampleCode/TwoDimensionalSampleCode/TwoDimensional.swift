@@ -145,50 +145,11 @@ class TwoDimensional {
      * - Returns: an array of the targets neighbors; nil, if the coordinates are invalid
      */
     func neighborsOf(targetCoordinate: CellCoordinates) -> [CellCoordinates]? {
-        // Validate the cell coordinates
-        if (targetCoordinate.row < 0 ||
-            targetCoordinate.row >= rowsMax ||
-            targetCoordinate.column < 0 ||
-            targetCoordinate.column >= columnsMax) {
-            print("Invalid target: (\(targetCoordinate))")
-            return nil
-        }
+
+        // Removed code until embargo is over...
+        print ("Neighbors of: <\(targetCoordinate)> nil")
         
-        let colMin = targetCoordinate.column - 1
-        let colMax = targetCoordinate.column + 1
-        let rowMin = targetCoordinate.row - 1
-        let rowMax = targetCoordinate.row + 1
-        
-        var neighbors = [CellCoordinates]()
-        
-        for var col in colMin...colMax {
-            for var row in rowMin...rowMax {
-                // Don't add the target to the array
-                if targetCoordinate.column == col &&
-                    targetCoordinate.row == row {
-                    continue
-                }
-                
-                if col < 0 {
-                    col = (col + columnsMax) % columnsMax
-                } else {
-                    col = col % columnsMax
-                }
-                
-                if row < 0 {
-                    row = (row + rowsMax) % rowsMax
-                } else {
-                    row = row % rowsMax
-                }
-                
-                neighbors.append(CellCoordinates(column: col,
-                    row: row))
-            }
-        }
-        
-        print ("Neighbors of: <\(targetCoordinate)> <\(neighbors)>")
-        
-        return neighbors
+        return nil
     }
     
     /**
@@ -201,18 +162,8 @@ class TwoDimensional {
      */
     func neighborCensusOf(targetCoordinate: CellCoordinates,
         in lifeGrid: LifeGrid) -> Int {
-        guard let neighbors = neighborsOf(targetCoordinate) else {
-            print("No neighbors of <\(targetCoordinate)>")
-            return 0
-        }
-        var census = 0
-        for neighbor in neighbors {
-            if lifeGrid[neighbor.row][neighbor.column] == TwoDimensional.interestingValue {
-                census += 1
-            }
-        }
-        
-        return census
+        // Removed until embargo is over...
+        return 0
     }
     
     /**
@@ -227,9 +178,7 @@ class TwoDimensional {
         
         for intArray in lifeGrid {
             for intValue in intArray {
-                if intValue == TwoDimensional.interestingValue {
-                    census += 1
-                }
+                // Remove until embargo is over
             }
         }
         
