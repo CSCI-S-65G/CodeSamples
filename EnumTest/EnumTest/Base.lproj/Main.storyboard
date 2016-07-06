@@ -19,20 +19,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ni-ZK-HsB" userLabel="WhiteSquare">
-                                <rect key="frame" x="236" y="236" width="128" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V15-RM-MbB" userLabel="ClearEmbeddingView">
+                                <rect key="frame" x="216" y="216" width="168" height="168"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ni-ZK-HsB" userLabel="WhiteSquare">
+                                        <rect key="frame" x="20" y="20" width="128" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="NDI-Zh-MYR"/>
+                                            <constraint firstAttribute="width" secondItem="2ni-ZK-HsB" secondAttribute="height" multiplier="1:1" id="lvt-zg-rkg"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0e-tt-NBJ" userLabel="ColorSquare">
+                                        <rect key="frame" x="20" y="20" width="128" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="128" id="AgZ-EJ-NWV"/>
+                                            <constraint firstAttribute="width" secondItem="h0e-tt-NBJ" secondAttribute="height" multiplier="1:1" id="KFa-r8-hUU"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="NDI-Zh-MYR"/>
-                                    <constraint firstAttribute="width" secondItem="2ni-ZK-HsB" secondAttribute="height" multiplier="1:1" id="lvt-zg-rkg"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0e-tt-NBJ" userLabel="ColorSquare">
-                                <rect key="frame" x="236" y="236" width="128" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="AgZ-EJ-NWV"/>
-                                    <constraint firstAttribute="width" secondItem="h0e-tt-NBJ" secondAttribute="height" multiplier="1:1" id="KFa-r8-hUU"/>
+                                    <constraint firstItem="h0e-tt-NBJ" firstAttribute="centerX" secondItem="V15-RM-MbB" secondAttribute="centerX" id="35Y-kO-AbD"/>
+                                    <constraint firstAttribute="width" constant="168" id="DZ8-Vl-xjH"/>
+                                    <constraint firstAttribute="bottom" secondItem="2ni-ZK-HsB" secondAttribute="bottom" constant="20" id="Hg6-ls-MeP"/>
+                                    <constraint firstItem="h0e-tt-NBJ" firstAttribute="centerY" secondItem="V15-RM-MbB" secondAttribute="centerY" id="Ncv-34-hsx"/>
+                                    <constraint firstItem="2ni-ZK-HsB" firstAttribute="top" secondItem="V15-RM-MbB" secondAttribute="top" constant="20" id="SIw-MA-MRN"/>
+                                    <constraint firstAttribute="width" secondItem="V15-RM-MbB" secondAttribute="height" multiplier="1:1" id="qwI-ig-iYD"/>
+                                    <constraint firstAttribute="trailing" secondItem="2ni-ZK-HsB" secondAttribute="trailing" constant="20" id="uG5-nr-CEk"/>
+                                    <constraint firstItem="2ni-ZK-HsB" firstAttribute="leading" secondItem="V15-RM-MbB" secondAttribute="leading" constant="20" id="ujv-Og-8hu"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiU-eJ-YX1">
@@ -61,18 +77,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="h0e-tt-NBJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5Ce-Xx-sUr"/>
-                            <constraint firstItem="2ni-ZK-HsB" firstAttribute="width" secondItem="2ni-ZK-HsB" secondAttribute="height" multiplier="1:1" id="9Km-dG-UxN"/>
-                            <constraint firstItem="h0e-tt-NBJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Eh3-3i-MY6"/>
                             <constraint firstItem="NiU-eJ-YX1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jhy-hl-Tqp"/>
-                            <constraint firstItem="2ni-ZK-HsB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="O2n-ix-dna"/>
                             <constraint firstItem="ToT-Ua-K2h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Pjw-jd-dm2"/>
+                            <constraint firstItem="V15-RM-MbB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VCM-4m-9W5"/>
                             <constraint firstItem="ToT-Ua-K2h" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WfU-1R-f0Z"/>
-                            <constraint firstItem="2ni-ZK-HsB" firstAttribute="width" secondItem="h0e-tt-NBJ" secondAttribute="width" id="hRz-6p-aFL"/>
+                            <constraint firstItem="V15-RM-MbB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eg4-Aj-BM0"/>
                             <constraint firstItem="n9h-sz-NJb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mlH-DA-yIt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NiU-eJ-YX1" secondAttribute="bottom" constant="20" id="ovA-Kc-tSL"/>
                             <constraint firstItem="n9h-sz-NJb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p84-mM-ujL"/>
-                            <constraint firstItem="2ni-ZK-HsB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qdt-dr-nKg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Color (View Controller)" id="9TF-Uo-0yc"/>
