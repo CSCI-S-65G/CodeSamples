@@ -14,11 +14,24 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var twoDim = TwoDimensional(columns: 5, rows: 10)
-        print(twoDim.prettyPrint(twoDim.twoDimensionalArray))
+        var twoDim = TwoDimensional(columns: -5, rows: -10)
+        print(twoDim.prettyPrint(twoDim.lifeGrid))
         
-        twoDim = TwoDimensional(columns: -5, rows: -10)
-        print(twoDim.prettyPrint(twoDim.twoDimensionalArray))
+        twoDim = TwoDimensional(columns: 5, rows: 10)
+        print(twoDim.prettyPrint(twoDim.lifeGrid))
+        
+//        twoDim.neighborsOf(CellCoordinates(column: 0, row: 0))
+//        twoDim.neighborsOf(CellCoordinates(column: 1, row: 1))
+        let target = CellCoordinates(column: 1, row: 0)
+        let census = twoDim.neighborCensusOf(target,
+                                             in: twoDim.lifeGrid)
+        print ("Census: \(census) of target <\(target)>")
+        print ("Full Census: (\(twoDim.censusOf(twoDim.lifeGrid)))")
+        
+        let targetValue = twoDim.lifeGrid[target.row][target.column]
+        let cellState = CellState(cell: targetValue,
+                                  neighborCount: census)
+        print ("cellState <\(cellState)> for targetValue (\(targetValue)) -> (\((cellState.isDead ? "Dead" : "Alive")))")
     }
 
     override func didReceiveMemoryWarning() {

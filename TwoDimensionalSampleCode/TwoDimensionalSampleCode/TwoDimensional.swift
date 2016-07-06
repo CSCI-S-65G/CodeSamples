@@ -8,18 +8,87 @@
 
 import Foundation
 
+// MARK: - typealias definitions
 /// A useful feature of Swift that lets you convert a known class to an alias to minimize typing. This is especially useful in closure definitions.
 typealias LifeGrid = [[Int]]
+
+typealias CellCoordinates = (row: Int, column: Int)
+
+// MARK: - CellState definition
+/**
+ * CellState
+ * 
+ * Note:
+ *  Rules of _*Conway's Game of Life*_:
+ *   * Dead cells:
+ *   *   3 interesting neighbors: Reproduction (Alive)
+ *   *   Otherwise, stays Dead
+ ***
+ *   * Living cells (interesting):
+ *   *   <2 interesting neighbors: Starvation (Dead)
+ *   *   2-3 interesting neighbors: Alive
+ *   *   >3 interesting neighbors: Overcrowding (Dead)
+ */
+enum CellState {
+    case dead
+    case reproduction
+    
+    case starvation
+    case alive
+    case overcrowding
+    
+    /// Dynamic variable to clarify death
+    var isDead: Bool {
+        switch (self) {
+            case .dead,
+                 .starvation,
+                 .overcrowding:
+            return true
+            case .reproduction,
+                 .alive:
+            return false
+        }
+    }
+    
+    /**
+     * Variant initializer to encorporate the rules of _*Conway's Game of Life*_
+     */
+    init(cell: Int, neighborCount: Int) {
+        let isAlive = cell == TwoDimensional.interestingValue
+        
+        if isAlive == false {
+            // Dead path
+            if neighborCount == 3 {
+                self = .reproduction
+            } else {
+                self = .dead
+            }
+        } else {
+            // Alive path
+            if neighborCount < 2 {
+                self = .starvation
+            } else if neighborCount == 2 || neighborCount == 3 {
+                self = .alive
+            } else {
+                self = .overcrowding
+            }
+        }
+    }
+}
 
 /**
  This class will create a two dimensional Int array and instantiate it
  with random values.
  */
 class TwoDimensional {
+    // MARK: - Properties
     let columnsMax : Int
     let rowsMax : Int
-    var twoDimensionalArray : LifeGrid
+    var lifeGrid : LifeGrid
     
+    private static let interestingValue = 1
+    
+    // MARK: - Life cycle methods
     /**
      Initialize the two-dimensional array defined in this class.
      
@@ -43,15 +112,128 @@ class TwoDimensional {
         }
         
         // Instantiate the array
-        twoDimensionalArray = Array(count: rowsMax,
+        lifeGrid = Array(count: rowsMax,
                                     repeatedValue: Array(count: columnsMax,
                                         repeatedValue: 0))
         // Set it to a random value
         for col in 0..<columnsMax {
             for row in 0..<rowsMax {
-                twoDimensionalArray[row][col] = Int(arc4random_uniform(3))
+                lifeGrid[row][col] = Int(arc4random_uniform(3))
             }
         }
+    }
+    
+    // MARK: - Conway Game of Life Methods
+    // This illustrates code samples within comments
+    /**
+     * Calculate the eight neighbors of a known coordinate
+     * 
+     *   ````
+     *   X X X O O -- Simple Case
+     *   X T X O O
+     *   X X X O O
+     *   O O O O O
+     * 
+     *   T X O O X -- Wrapped case
+     *   X X O O X
+     *   O O O O O
+     *   X X O O X
+     *   ````
+     *
+     * - Parameter targetCoordinate: of the target cell
+     *
+     * - Returns: an array of the targets neighbors; nil, if the coordinates are invalid
+     */
+    func neighborsOf(targetCoordinate: CellCoordinates) -> [CellCoordinates]? {
+        // Validate the cell coordinates
+        if (targetCoordinate.row < 0 ||
+            targetCoordinate.row >= rowsMax ||
+            targetCoordinate.column < 0 ||
+            targetCoordinate.column >= columnsMax) {
+            print("Invalid target: (\(targetCoordinate))")
+            return nil
+        }
+        
+        let colMin = targetCoordinate.column - 1
+        let colMax = targetCoordinate.column + 1
+        let rowMin = targetCoordinate.row - 1
+        let rowMax = targetCoordinate.row + 1
+        
+        var neighbors = [CellCoordinates]()
+        
+        for var col in colMin...colMax {
+            for var row in rowMin...rowMax {
+                // Don't add the target to the array
+                if targetCoordinate.column == col &&
+                    targetCoordinate.row == row {
+                    continue
+                }
+                
+                if col < 0 {
+                    col = (col + columnsMax) % columnsMax
+                } else {
+                    col = col % columnsMax
+                }
+                
+                if row < 0 {
+                    row = (row + rowsMax) % rowsMax
+                } else {
+                    row = row % rowsMax
+                }
+                
+                neighbors.append(CellCoordinates(column: col,
+                    row: row))
+            }
+        }
+        
+        print ("Neighbors of: <\(targetCoordinate)> <\(neighbors)>")
+        
+        return neighbors
+    }
+    
+    /**
+     * Census of the neighbors of a known target
+     * 
+     * - Parameter targetCoordinate: of the cell
+     * - Parameter lifeGrid: to evaluate
+     * 
+     * - Returns: the number of interesting neighbors; 0 for a invalid targetCoordinate
+     */
+    func neighborCensusOf(targetCoordinate: CellCoordinates,
+        in lifeGrid: LifeGrid) -> Int {
+        guard let neighbors = neighborsOf(targetCoordinate) else {
+            print("No neighbors of <\(targetCoordinate)>")
+            return 0
+        }
+        var census = 0
+        for neighbor in neighbors {
+            if lifeGrid[neighbor.row][neighbor.column] == TwoDimensional.interestingValue {
+                census += 1
+            }
+        }
+        
+        return census
+    }
+    
+    /**
+     A count of all interesting cells in the lifeGrid
+     
+     - Parameter lifeGrid: to count
+     
+     - Returns: count of interesting cells
+     */
+    func censusOf(lifeGrid: LifeGrid) -> Int {
+        var census = 0
+        
+        for intArray in lifeGrid {
+            for intValue in intArray {
+                if intValue == TwoDimensional.interestingValue {
+                    census += 1
+                }
+            }
+        }
+        
+        return census
     }
     
     /**
