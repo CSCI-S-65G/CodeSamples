@@ -20,7 +20,7 @@ import UIKit
  * * Violet
  */
 enum Color : String {
-    case red
+    case red = "Pretty pretty Red"
     case orange
     case yellow
     case green
@@ -28,6 +28,7 @@ enum Color : String {
     case violet
     
     /// Color associated with the enum value
+    // This is a dynamic variable (a property)
     var color : UIColor {
         switch (self) {
         case .red:
@@ -46,6 +47,7 @@ enum Color : String {
     }
     
     /// Helper to cycle the colors
+    // This is a method (a function)
     func nextColor() -> Color {
         switch self {
         case .red:
@@ -61,5 +63,15 @@ enum Color : String {
         case .violet:
             return .red
         }
+    }
+    
+    mutating func next() -> Color {
+        switch self {
+        case .red:
+            self = .orange
+        default:
+            self = .red
+        }
+        return self
     }
 }

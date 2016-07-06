@@ -33,12 +33,16 @@ class ViewController: UIViewController {
     // MARK: - UIElement Actions
     @IBAction func colorCyclePressed(button: UIButton) {
         // Cycle the color
-        currentColor = currentColor.nextColor()
+//        currentColor = currentColor.nextColor()
+        currentColor.next()
         
         // Change the color
         colorSquare.backgroundColor = currentColor.color
     }
     
+    @IBAction func tapped(sender: AnyObject) {
+        print("tapped (\(sender))")
+    }
     @IBAction func flipColorSquare(button: UIButton) {
         // Add the flip animation
         let fromView : UIView
@@ -59,10 +63,15 @@ class ViewController: UIViewController {
         UIView.transitionFromView(fromView,
                                   toView: toView,
                                   duration: 0.5,
-                                  options: [UIViewAnimationOptions.TransitionFlipFromLeft,
+                                  options:
+            [UIViewAnimationOptions.TransitionFlipFromLeft,
                                     .ShowHideTransitionViews],
                                   completion: nil)
     }
 
+    @IBAction func tappedColorSquared(sender: UITapGestureRecognizer) {
+        print ("Tapped")
+    }
+    
 }
 
