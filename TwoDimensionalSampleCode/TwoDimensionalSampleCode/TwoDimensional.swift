@@ -146,10 +146,46 @@ class TwoDimensional {
      */
     func neighborsOf(targetCoordinate: CellCoordinates) -> [CellCoordinates]? {
 
-        // Removed code until embargo is over...
-        print ("Neighbors of: <\(targetCoordinate)> nil")
+        // Validate the input
+        if targetCoordinate.row < 0 ||
+            targetCoordinate.row >= rowsMax ||
+            targetCoordinate.column < 0 ||
+            targetCoordinate.column >= columnsMax {
+            print ("target (r: (\(targetCoordinate.row)) c: (\(targetCoordinate.column)) invalid")
+            return nil
+        }
         
-        return nil
+        // Loop through the grid and normalize the values
+        let rowMin = targetCoordinate.row - 1
+        let rowMax = targetCoordinate.row + 1
+        let colMin = targetCoordinate.column - 1
+        let colMax = targetCoordinate.column + 1
+        
+        var neighbors = [CellCoordinates]()
+        
+        for row in rowMin ... rowMax {
+            for col in colMin ... colMax {
+                var tmpRow = row % rowsMax
+                var tmpCol = col % columnsMax
+                
+                if tmpRow < 0 {
+                    tmpRow = (tmpRow + rowsMax) % rowsMax
+                }
+                if tmpCol < 0 {
+                    tmpCol = (tmpCol + columnsMax) % columnsMax
+                }
+                
+                if tmpRow != targetCoordinate.row ||
+                    tmpCol != targetCoordinate.column {
+                    neighbors.append(CellCoordinates(row: tmpRow, column: tmpCol))
+                }
+                
+            }
+        }
+//        print ("Neighbors: <\(neighbors)> of " +
+//            "<R: \(targetCoordinate.row), " +
+//            "C: \(targetCoordinate.column)>")
+        return neighbors
     }
     
     /**
@@ -162,8 +198,21 @@ class TwoDimensional {
      */
     func neighborCensusOf(targetCoordinate: CellCoordinates,
         in lifeGrid: LifeGrid) -> Int {
-        // Removed until embargo is over...
-        return 0
+        // Validate the neighbors list, as it doesn't return,
+        // if the CellCoordinates are invalid
+        guard let neighbors = neighborsOf(targetCoordinate) else {
+            print ("No neighbors found for (r \(targetCoordinate.row)) c (\(targetCoordinate.column))")
+            return 0
+        }
+
+        var neighborCensus = 0
+        for neighbor in neighbors {
+            if lifeGrid[neighbor.row][neighbor.column] == TwoDimensional.interestingValue {
+                neighborCensus += 1
+            }
+        }
+    
+        return neighborCensus
     }
     
     /**
@@ -178,7 +227,9 @@ class TwoDimensional {
         
         for intArray in lifeGrid {
             for intValue in intArray {
-                // Remove until embargo is over
+                if intValue == TwoDimensional.interestingValue {
+                    census += 1
+                }
             }
         }
         
@@ -209,11 +260,44 @@ class TwoDimensional {
         var prettyPrintLog = "[\(derivedColumns)x\(derivedRows)]\n"
         for intArray in lifeGrid {
             for intValue in intArray {
-                prettyPrintLog += "\(intValue) "
+//                prettyPrintLog += "\(intValue) "
+                prettyPrintLog += (intValue == TwoDimensional.interestingValue) ? "X " : "O "
             }
             prettyPrintLog += "\n"
         }
         
         return prettyPrintLog
+    }
+    
+    /**
+     * Step method to generate the next iteration of the
+     * lifeGrid
+     */
+    func step(lifeGrid: LifeGrid) -> LifeGrid {
+        // Validate
+        if lifeGrid.isEmpty {
+            print ("lifegrid is empty")
+            prettyPrint(lifeGrid)
+            return LifeGrid()
+        }
+        // Create the second lifegrid to write into
+        var nextLifeGrid = Array(count: rowsMax,
+                                 repeatedValue: Array(count: columnsMax,
+                                    repeatedValue: 0))
+        
+        // Walk the current grid and populate the new one
+        for row in 0..<rowsMax {
+            for col in 0..<columnsMax {
+                // Get the current cell
+                let cellStatus = lifeGrid[row][col]
+                // Get the neighbor census
+                let neighborCensus = neighborCensusOf(CellCoordinates(row: row, column: col), in: lifeGrid)
+                // What's the next cell state going to be
+                let nextCellState = CellState(cell: cellStatus, neighborCount: neighborCensus)
+                // Generate the next value interestingValue == alive; otherwise, 0
+                nextLifeGrid[row][col] = (nextCellState.isDead ? 0 : TwoDimensional.interestingValue)
+            }
+        }
+        return nextLifeGrid
     }
 }

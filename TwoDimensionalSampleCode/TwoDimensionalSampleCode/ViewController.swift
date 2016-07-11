@@ -16,9 +16,11 @@ class ViewController: UIViewController {
         
         var twoDim = TwoDimensional(columns: -5, rows: -10)
         print(twoDim.prettyPrint(twoDim.lifeGrid))
+        print("Census: (\(twoDim.censusOf(twoDim.lifeGrid)))")
         
         twoDim = TwoDimensional(columns: 5, rows: 10)
         print(twoDim.prettyPrint(twoDim.lifeGrid))
+        print("Census: (\(twoDim.censusOf(twoDim.lifeGrid)))")
         
 //        twoDim.neighborsOf(CellCoordinates(column: 0, row: 0))
 //        twoDim.neighborsOf(CellCoordinates(column: 1, row: 1))
@@ -32,6 +34,11 @@ class ViewController: UIViewController {
         let cellState = CellState(cell: targetValue,
                                   neighborCount: census)
         print ("cellState <\(cellState)> for targetValue (\(targetValue)) -> (\((cellState.isDead ? "Dead" : "Alive")))")
+        
+        let nextLifeGrid = twoDim.step(twoDim.lifeGrid)
+        print(twoDim.prettyPrint(nextLifeGrid))
+        print("Census: (\(twoDim.censusOf(nextLifeGrid)))")
+        
     }
 
     override func didReceiveMemoryWarning() {
