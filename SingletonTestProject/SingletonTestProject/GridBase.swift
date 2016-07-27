@@ -104,6 +104,7 @@ extension GridBase : PositionsProtocol {
                     maxCols = col
                 }
             }
+            // Think about why you want a higher number
             rows = maxRows + 1
             cols = maxCols + 1
             
