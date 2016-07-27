@@ -78,6 +78,7 @@ class GridBase : GridProtocol {
 }
 
 extension GridBase : PositionsProtocol {
+    // REMEMBER: For your final project, the requirement about for-loops should be replaced with .map, .reduce, .filter, .sort will affect your grades.
     var positions: [Position] {
         get {
             var tmpPositions = [Position]()

@@ -21,6 +21,7 @@ protocol GridProtocol : CustomStringConvertible {
     subscript(row: Int, col: Int) -> Bool {get set}
 }
 
+// This is may be different than what you'll get in the JSON file which has a slightly different format, so it'll need to be normalized to make sure that it matches the format expected. Or the argument(s) will need to change.
 protocol PositionsProtocol {
     var positions: [Position] {get set}
 }
